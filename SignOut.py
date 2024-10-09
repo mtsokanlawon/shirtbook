@@ -67,7 +67,7 @@ def verify_signatures(Signature_df):
         return f'{username} is not a valid username!'
 
 # Function to generate word cloud
-@st.cache_data
+# @st.cache_data
 def generate_wordcloud(text):
     stopwords = set(STOPWORDS).union({'nan', 'NaN', 'Nan', 'NAN'})
     wordcloud = WordCloud(background_color='white', stopwords=stopwords).generate(text)
