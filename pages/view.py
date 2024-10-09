@@ -65,7 +65,7 @@ if st.button('Login'):
         st.image('wordcloud.png')
 
         # Share shirt link
-        shirt_link = f'https://signout.streamlit.user.app/{user}'
+        shirt_link = f'https://signout.streamlit.app/'
         st.write(f'Share your shirt link on your socials for friends to sign!')
         st.write(f'Your link is {shirt_link}, access username: \'{user}\'')
 

@@ -111,7 +111,7 @@ if SignOut_phrase:
         # if not User_df.empty:
         generate_shirt(User_df['username'].unique()[0])
         st.write('Share your shirt link on your socials for friends to sign!')
-        st.write(f'Your link: https://signout.streamlit.user.app, access username:{username}')
+        st.write(f'Your link: https://signout.streamlit.app/, access username:{username}')
         st.page_link('pages/view.py', label='Login to view and download shirt')
         
 
