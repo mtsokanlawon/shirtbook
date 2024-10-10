@@ -1,0 +1,1 @@
+This project aims to develop a web app that will be used as signout(sendforth painting, marking with marker- precisely) merchandise page by graduating students or workers at all levels of learning and working
