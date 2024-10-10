@@ -3,7 +3,13 @@ import pandas as pd
 from wordcloud import WordCloud, STOPWORDS
 from streamlit_gsheets import GSheetsConnection
 
+
+def get_db_data(sheet_name):
+    conn = st.connection("gsheets", type=GSheetsConnection)
+    return conn.read(worksheet=sheet_name)
+
 # Get login data from the user
+
 def get_login_data():
     name = st.text_input('Enter your name')
     username = st.text_input('Enter username:', max_chars=20)
@@ -37,12 +43,12 @@ st.write('Provide your details to view your shirts. ensure you signed up! reload
 df = get_login_data()
 
 if st.button('Login'):
-    conn = st.connection("gsheets", type=GSheetsConnection)
+    # conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Read Google Sheets data
-    Users_DB = conn.read(worksheet="UsersDB")
-    Signatures_DB = conn.read(worksheet="SignaturesDB")
-    SOphrase_DB = conn.read(worksheet="SOphraseDB")
+    Users_DB = get_db_data("UsersDB")
+    Signatures_DB = get_db_data("SignaturesDB")
+    SOphrase_DB = get_db_data("SOphraseDB")
 
     status_ver = verify_login()
 

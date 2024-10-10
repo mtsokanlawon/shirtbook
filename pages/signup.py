@@ -8,7 +8,7 @@ st.title('SignOut')
 st.write("Welcome to SignOut! Sign up to create your signout page.")
 
 # Google Sheets connection (cached for optimization)
-# @st.cache_data(ttl=600)
+@st.cache_resource(ttl=60)
 def get_db_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
     return conn.read(worksheet=sheet_name)
