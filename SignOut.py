@@ -9,7 +9,12 @@ from streamlit_gsheets import GSheetsConnection
 @st.cache_resource(ttl=60)
 def fetch_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
-    return conn.read(worksheet=sheet_name)
+    return conn.read(worksheet=sheet_name, ttl=0)
+
+# Function to update data
+def update_db_data(sheet_name, updtd_df):
+    conn = st.connection("gsheets", type=GSheetsConnection)
+    conn.update(worksheet=sheet_name, data=updtd_df )
 
 # Optimized justify function using NumPy and pandas
 def justify(a, invalid_val=0, axis=1, side='left'):    
@@ -108,17 +113,17 @@ updt_Signatures = pd.DataFrame(arr, columns=updt_Signatures.columns, index=updt_
 
 # Button to sign the friend's signature
 if st.button('Sign!', type='primary'):
-    conn = st.connection("gsheets", type=GSheetsConnection)
-    Signatures_DB = conn.read(worksheet="SignaturesDB")
+    # conn = st.connection("gsheets", type=GSheetsConnection)
+    Signatures_DB = fetch_data("SignaturesDB")
     
     # Verify signature
     signature_ver = verify_signatures(Signature_df)
     
     if signature_ver == f'Successfully signed on {username}!':
-        conn.update(worksheet="SignaturesDB", data=updt_Signatures)
+        update_db_data("SignaturesDB", updt_Signatures)
         st.success(signature_ver)
         
-        updt_SOphrases = conn.read(worksheet="SOphraseDB")
+        updt_SOphrases = fetch_data("SOphraseDB")
         user = username
         db_signatures = updt_Signatures[username]
         def_signature = f'Yah,{user},'  # Default text

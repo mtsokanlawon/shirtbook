@@ -11,7 +11,7 @@ st.write("Welcome to SignOut! Sign up to create your signout page.")
 @st.cache_resource(ttl=60)
 def get_db_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
-    return conn.read(worksheet=sheet_name)
+    return conn.read(worksheet=sheet_name, ttl=0)
 
 # Function to update data
 def update_db_data(sheet_name, updtd_df):

@@ -6,7 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 
 def get_db_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
-    return conn.read(worksheet=sheet_name)
+    return conn.read(worksheet=sheet_name, ttl=0)
 
 # Get login data from the user
 
@@ -30,7 +30,7 @@ def verify_login():
     name = df["name"].unique()[0]
     username = df["username"].unique()[0]
     reconn = st.connection("gsheets", type=GSheetsConnection)
-    Users_DBupdtd = reconn.read(worksheet="UsersDB")
+    Users_DBupdtd = reconn.read(worksheet="UsersDB", ttl=0)
 
     # Verify the login details
     if not Users_DBupdtd.query('username == @username and name == @name').empty:
