@@ -74,7 +74,7 @@ def verify_signatures(Signature_df):
 # Function to generate word cloud
 # @st.cache_data
 def generate_wordcloud(text):
-    stopwords = set(STOPWORDS).union({'nan', 'NaN', 'Nan', 'NAN'})
+    stopwords = {'nan', 'NaN', 'Nan', 'NAN'}
     wordcloud = WordCloud(background_color='white', stopwords=stopwords).generate(text)
     return wordcloud.to_array()
 

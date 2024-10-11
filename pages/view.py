@@ -62,7 +62,7 @@ if st.button('Login'):
         signatures = def_signature + db_signatures.astype(str)
         signatures_cleaned = [str(item) for item in signatures if item is not None and item != 'nan']
 
-        stopwords = set(STOPWORDS).union({'nan', 'NaN', 'Nan', 'NAN'})
+        stopwords = {'nan', 'NaN', 'Nan', 'NAN'}
 
         # Generate word cloud
         wordcloud = WordCloud(background_color='white', stopwords=stopwords).generate(' '.join(signatures_cleaned))
