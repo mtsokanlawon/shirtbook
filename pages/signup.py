@@ -4,14 +4,15 @@ from wordcloud import WordCloud, STOPWORDS
 from streamlit_gsheets import GSheetsConnection
 
 # Page Title
-st.title('SignOut')
+st.title(":rainbow[SignOut]")
 st.write("Welcome to SignOut! Sign up to create your signout page.")
 
 # Navigation
 with st.sidebar:
-    st.header('Navigation')
-    st.page_link('pages/signup.py', label='Sign Up')
-    st.page_link('pages/view.py', label='Login')
+    st.header(':rainbow[Navigation]')
+    st.page_link('SignOut.py', label=':blue[Home]')
+    st.page_link('pages/signup.py', label=':orange[Sign Up]')
+    st.page_link('pages/view.py', label=':violet[Login]')
 
 # Google Sheets connection (cached for optimization)
 @st.cache_resource(ttl=60)
@@ -85,7 +86,7 @@ if not User_df.empty:
     # update Database 
 
 # Display "Sign Up" button and handle signup
-if st.button('Sign Up'):
+if st.button(':blue[Sign Up]'):
     status_ver = verify_user(User_df)
     
     if status_ver == "Success":
@@ -103,6 +104,9 @@ if st.button('Sign Up'):
 # Add the user's signout phrase to SOphraseDB
 SignOut_phrase = get_signout_phrase()
 if SignOut_phrase:
+    if User_df.empty:
+        st.error(':rainbow[Ooops]: you forgot to signup')
+        st.stop()
     signout_df = pd.DataFrame({
         'username': [username],
         'signoutphrase': [SignOut_phrase]
@@ -118,7 +122,7 @@ if SignOut_phrase:
         generate_shirt(User_df['username'].unique()[0])
         st.write('Share your shirt link on your socials for friends to sign!')
         st.write(f'Your link: https://signout.streamlit.app/, access username:{username}')
-        st.page_link('pages/view.py', label='Login to view and download shirt')
+        st.page_link('pages/view.py', label=':blue[Login] to view and download shirt')
         
 
 

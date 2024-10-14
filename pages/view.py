@@ -38,17 +38,18 @@ def verify_login():
     else:
         return "Invalid name or username!"
 
-st.title('SignOut Shirt')
+st.title(":rainbow[SignOut] Shirt")
 st.write('Provide your details to view your shirts. ensure you signed up! reload page if failed.')
 df = get_login_data()
 
 # Navigation
 with st.sidebar:
-    st.header('Navigation')
-    st.page_link('pages/signup.py', label='Sign Up')
-    st.page_link('pages/view.py', label='Login')
+    st.header(':rainbow[Navigation]')
+    st.page_link('SignOut.py', label=':blue[Home]')
+    st.page_link('pages/signup.py', label=':orange[Sign Up]')
+    st.page_link('pages/view.py', label=':violet[Login]')
 
-if st.button('Login'):
+if st.button(':violet[Login]'):
     # conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Read Google Sheets data
@@ -59,7 +60,7 @@ if st.button('Login'):
     status_ver = verify_login()
 
     if status_ver == "Login Successful":
-        st.success(status_ver)
+        st.warning(status_ver)
         user = df['username'].unique()[0]
         db_signatures = Signatures_DB[user]
         
@@ -88,6 +89,7 @@ if st.button('Login'):
                 data=file,
                 file_name=f"{user}signout_shirt.png",
                 mime="image/png",
+                type='primary'
             )
 
     else:

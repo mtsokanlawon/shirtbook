@@ -58,7 +58,7 @@ def get_frnd_signatures():
 # Function to validate input
 def validate_input(input_data):
     if not input_data.strip():
-        st.error("Input cannot be empty.")
+        st.warning("Input cannot be empty.")
         return False
     return True
 
@@ -79,18 +79,19 @@ def generate_wordcloud(text):
     return wordcloud.to_array()
 
 # App title and description
-st.title("SignOut")
+st.title(":rainbow[SignOut]")
 st.write("Welcome to SignOut!")
-st.page_link('pages/signup.py', label='Sign up to create your signout page')
+st.page_link('pages/signup.py', label=':red[Sign up] to create your signout page')
 
 # Sidebar navigation
 with st.sidebar:
-    st.header('Navigation')
-    st.page_link('pages/signup.py', label='Sign Up')
-    st.page_link('pages/view.py', label='Login')
+    st.header(':rainbow[Navigation]')
+    st.page_link('SignOut.py', label=':blue[Home]')
+    st.page_link('pages/signup.py', label=':orange[Sign Up]')
+    st.page_link('pages/view.py', label=':violet[Login]')
 
 # Display user's friend's signature section
-st.header('Sign a Friend!')
+st.header(':blue[Sign] :orange[*on*] :violet[*a*] **Friend**:red[!]')
 Signature_df = get_frnd_signatures()
 if Signature_df.empty:
     st.stop()
