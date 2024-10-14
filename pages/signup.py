@@ -7,6 +7,12 @@ from streamlit_gsheets import GSheetsConnection
 st.title('SignOut')
 st.write("Welcome to SignOut! Sign up to create your signout page.")
 
+# Navigation
+with st.sidebar:
+    st.header('Navigation')
+    st.page_link('pages/signup.py', label='Sign Up')
+    st.page_link('pages/view.py', label='Login')
+
 # Google Sheets connection (cached for optimization)
 @st.cache_resource(ttl=60)
 def get_db_data(sheet_name):
@@ -55,7 +61,7 @@ def verify_user(Users_df):
 
 # Function to capture the user's signout phrase
 def get_signout_phrase():
-    return st.text_input('Thank God for your wins!')
+    return st.text_input('Type in your post, Thank God for your wins!')
 
 # Function to generate a shirt design (word cloud)
 def generate_shirt(username):

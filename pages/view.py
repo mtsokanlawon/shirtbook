@@ -42,6 +42,12 @@ st.title('SignOut Shirt')
 st.write('Provide your details to view your shirts. ensure you signed up! reload page if failed.')
 df = get_login_data()
 
+# Navigation
+with st.sidebar:
+    st.header('Navigation')
+    st.page_link('pages/signup.py', label='Sign Up')
+    st.page_link('pages/view.py', label='Login')
+
 if st.button('Login'):
     # conn = st.connection("gsheets", type=GSheetsConnection)
 
