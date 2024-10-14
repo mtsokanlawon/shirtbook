@@ -6,7 +6,7 @@ from wordcloud import WordCloud, STOPWORDS
 from streamlit_gsheets import GSheetsConnection
 
 # Optimized caching function for GSheets connection
-@st.cache_resource(ttl=60)
+@st.cache_resource(ttl=120)
 def fetch_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
     return conn.read(worksheet=sheet_name, ttl=0)
@@ -80,8 +80,8 @@ def generate_wordcloud(text):
 
 # App title and description
 st.title(":rainbow[SignOut]")
-st.write("Welcome to SignOut!")
-st.page_link('pages/signup.py', label=':red[Sign up] to create your signout page')
+st.page_link('pages/about.py', label="Welcome to SignOut! Learn :blue[more]")
+st.page_link('pages/signup.py', label='click :red[Sign up] to create your signout page')
 
 # Sidebar navigation
 with st.sidebar:
@@ -89,6 +89,7 @@ with st.sidebar:
     st.page_link('SignOut.py', label=':blue[Home]')
     st.page_link('pages/signup.py', label=':orange[Sign Up]')
     st.page_link('pages/view.py', label=':violet[Login]')
+    st.page_link('pages/about.py', label=':violet-background[About]')
 
 # Display user's friend's signature section
 st.header(':blue[Sign] :orange[*on*] :violet[*a*] **Friend**:red[!]')

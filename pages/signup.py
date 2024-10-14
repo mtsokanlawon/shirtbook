@@ -13,6 +13,7 @@ with st.sidebar:
     st.page_link('SignOut.py', label=':blue[Home]')
     st.page_link('pages/signup.py', label=':orange[Sign Up]')
     st.page_link('pages/view.py', label=':violet[Login]')
+    st.page_link('pages/about.py', label=':violet-background[About]')
 
 # Google Sheets connection (cached for optimization)
 @st.cache_resource(ttl=60)

@@ -48,6 +48,7 @@ with st.sidebar:
     st.page_link('SignOut.py', label=':blue[Home]')
     st.page_link('pages/signup.py', label=':orange[Sign Up]')
     st.page_link('pages/view.py', label=':violet[Login]')
+    st.page_link('pages/signup.py', label=':violet-background[About]')
 
 if st.button(':violet[Login]'):
     # conn = st.connection("gsheets", type=GSheetsConnection)
