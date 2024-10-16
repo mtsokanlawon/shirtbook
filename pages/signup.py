@@ -16,7 +16,7 @@ with st.sidebar:
     st.page_link('pages/about.py', label=':violet-background[About]')
 
 # Google Sheets connection (cached for optimization)
-@st.cache_resource(ttl=60)
+@st.cache_resource(ttl=30)
 def get_db_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
     return conn.read(worksheet=sheet_name, ttl=0)
@@ -92,7 +92,7 @@ if st.button(':blue[Sign Up]'):
     
     if status_ver == "Success":
         # Update UsersDB
-        Updt_Users = pd.concat([Users_DB, User_df], axis=0, ignore_index=True)
+        Updt_Users = pd.concat([Users_DB, User_df], axis=0, ignore_index=True).drop_duplicates(ignore_index=True)
         update_db_data("UsersDB", Updt_Users)
         st.success("Sign up successful! Wait...")
         update_db_data("SignaturesDB", Signatures_DB) # update signatures users.
@@ -108,23 +108,23 @@ if SignOut_phrase:
     if User_df.empty:
         st.error(':rainbow[Ooops]: you forgot to signup')
         st.stop()
-    signout_df = pd.DataFrame({
-        'username': [username],
-        'signoutphrase': [SignOut_phrase]
-        })
-    updt_SOphrases = pd.concat([SOphrase_DB, signout_df], axis=0, ignore_index=True)
-    update_db_data("SOphraseDB", updt_SOphrases)
+    
 # st.success("SignOut phrase saved!")
 # else:
     # st.warning("You can add a SignOut phrase later.")
     # Shirt creation section
     if st.button('Create Shirt', type='primary'):
+        signout_df = pd.DataFrame({
+        'username': [username],
+        'signoutphrase': [SignOut_phrase]
+        })
+        updt_SOphrases = pd.concat([SOphrase_DB, signout_df], axis=0, ignore_index=True).drop_duplicates(ignore_index=True)
+        update_db_data("SOphraseDB", updt_SOphrases)
         # if not User_df.empty:
         generate_shirt(User_df['username'].unique()[0])
         st.write('Share your shirt link on your socials for friends to sign!')
-        st.write(f'Your link: https://signout.streamlit.app/, access username:{username}')
+        st.markdown(f"Your link: [signout.streamlit.app](https://signout.streamlit.app/?embed=True), access username:{username}")
         st.page_link('pages/view.py', label=':blue[Login] to view and download shirt')
-        
 
 
 

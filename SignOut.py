@@ -6,12 +6,13 @@ from wordcloud import WordCloud, STOPWORDS
 from streamlit_gsheets import GSheetsConnection
 
 # Optimized caching function for GSheets connection
-@st.cache_resource(ttl=120)
+@st.cache_resource(ttl=30)
 def fetch_data(sheet_name):
     conn = st.connection("gsheets", type=GSheetsConnection)
     return conn.read(worksheet=sheet_name, ttl=0)
 
 # Function to update data
+@st.cache_resource(ttl=0)
 def update_db_data(sheet_name, updtd_df):
     conn = st.connection("gsheets", type=GSheetsConnection)
     conn.update(worksheet=sheet_name, data=updtd_df )

@@ -79,9 +79,8 @@ if st.button(':violet[Login]'):
         st.image('wordcloud.png')
 
         # Share shirt link
-        shirt_link = f'https://signout.streamlit.app/'
         st.write(f'Share your shirt link on your socials for friends to sign!')
-        st.write(f'Your link is {shirt_link}, access username: \'{user}\'')
+        st.markdown(f"Your link: [signout.streamlit.app](https://signout.streamlit.app/?embed=True), access username:{user}")
 
         # Allow the user to download the word cloud image
         with open("wordcloud.png", "rb") as file:
